@@ -328,6 +328,7 @@ network::IPAddress ModemComponent::get_ip_address() {
 void ModemComponent::got_ip_event_handler(void *arg, esp_event_base_t event_base, int event_id, void *event_data) {
   ESP_LOGD(TAG, "IP event! %" PRIu32, event_id);
   if (event_id == IP_EVENT_PPP_GOT_IP) {
+    global_modem_component->connected_ = true;
     global_modem_component->set_state(ModemComponentState::CONNECTED);
     esp_netif_dns_info_t dns_info;
 

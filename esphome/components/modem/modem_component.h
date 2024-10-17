@@ -119,6 +119,7 @@ class ModemComponent : public Component {
   uint change_state_{0};
 
   bool started_{false};
+  bool connected_{false};
 
   ModemComponentState state_{ModemComponentState::TURNING_ON_POWER};
   int connect_begin_;
