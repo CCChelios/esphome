@@ -158,7 +158,8 @@ void ModemComponent::loop() {
         ESP_LOGD(TAG, "Starting modem connection");
         ESP_LOGD(TAG, "SIgnal quality: rssi=%d", get_rssi_());
         this->set_state_(ModemComponentState::CONNECTING);
-        this->dce_->set_data();
+        // this->dce_->set_data();
+        this->dce_->set_mode(esp_modem::modem_mode::CMUX_MODE);
       } else {
         ESP_LOGD(TAG, "Wait RSSI");
       }
@@ -305,11 +306,28 @@ void ModemComponent::dump_connect_params() {
 int ModemComponent::get_rssi_() {
   int rssi = 0, ber = 0;
   esp_modem::command_result errr = this->dce_->get_signal_quality(rssi, ber);
-  // esp_err_t err = esp_modem::esp_modem_get_signal_quality(dce, &rssi, &ber);
   if (errr != esp_modem::command_result::OK) {
     ESP_LOGE(TAG, "esp_modem_get_signal_quality failed with");
   }
   return rssi;
+}
+
+int ModemComponent::get_ber_() {
+  int rssi = 0, ber = 0;
+  esp_modem::command_result errr = this->dce_->get_signal_quality(rssi, ber);
+  if (errr != esp_modem::command_result::OK) {
+    ESP_LOGE(TAG, "esp_modem_get_signal_quality failed with");
+  }
+  return ber;
+}
+
+int ModemComponent::get_modem_voltage_() {
+  int milli_volt = 0, bcs = 0, bcl = 0;
+  esp_modem::command_result errr = this->dce_->get_battery_status(milli_volt, bcs, bcl);
+  if (errr != esp_modem::command_result::OK) {
+    ESP_LOGE(TAG, "esp_modem_get_modem_voltage failed with");
+  }
+  return milli_volt;
 }
 
 float ModemComponent::get_setup_priority() const { return setup_priority::MODEM; }

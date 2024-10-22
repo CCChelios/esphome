@@ -94,6 +94,7 @@ class ModemComponent : public Component {
 
   bool check_modem_component_state_timings_();
   int get_rssi_();
+  int get_ber_();
   int get_modem_voltage_();
   const char *get_state_();
   void set_state_(ModemComponentState state);
