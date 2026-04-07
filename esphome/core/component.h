@@ -40,6 +40,7 @@ inline constexpr float BLUETOOTH = 350.0f;
 inline constexpr float AFTER_BLUETOOTH = 300.0f;
 inline constexpr float WIFI = 250.0f;
 inline constexpr float ETHERNET = 250.0f;
+inline constexpr float MODEM = 250.0f;
 /// For components that should be initialized after WiFi and before API is connected.
 inline constexpr float BEFORE_CONNECTION = 220.0f;
 /// For components that should be initialized after WiFi is connected.

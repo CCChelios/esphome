@@ -79,3 +79,5 @@ dependencies:
     version: 3.4.91
   lvgl/lvgl:
     version: 9.5.0
+  espressif/esp_modem:
+    version: 2.0.1
